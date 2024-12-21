@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Card Generator</title>
+    <meta name="description" content="Create a personalized Christmas card from Santa Claus for your child. Simply enter their name to generate a unique and heartwarming message.">
+    <meta name="keywords" content="Christmas card, Santa Claus, personalized card, Christmas letter, holiday card, gift, kids">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Caveat', cursive;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .main-title {
+           font-size: 2.5em;
+            color: #3498db;
+           margin-bottom: 20px;
+            font-weight: bold;
+             text-align: center;
+        }
+
+        .input-container{
+            display: flex;
+           flex-direction: column;
+            align-items: center;
+            padding: 20px;
+             border: 2px dashed #fdd5ba;
+            border-radius: 10px;
+            background-color: #fff;
+             max-width: 600px;
+        }
+       .input-container label, .input-container button {
+           margin-bottom: 10px;
+        }
+        .input-container input {
+            margin-bottom: 20px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+             max-width: 300px;
+        }
+          .input-container .instruction {
+              font-size: 0.9em;
+             color: #777;
+            margin-top: 10px;
+            text-align: center;
+            line-height: 1.5;
+          }
+         .card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            border: 2px solid #fdd5ba;
+            position: relative;
+           margin-top: 20px;
+        }
+        .card h1 {
+            font-size: 3em;
+            color: #d0312d;
+            margin-bottom: 20px;
+            font-weight: 700;
+           text-align: center;
+        }
+         .card h1::before,
+        .card h1::after{
+            content: "🌟";
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .card .english-text{
+            font-size: 1.4em;
+             line-height: 1.7;
+            color: #444;
+            text-align: left;
+        }
+         .card .english-text p{
+               margin-bottom: 15px;
+           }
+          .card .english-text p:first-child {
+                text-indent: 0;
+              }
+        .card .english-text p+p{
+              text-indent: 2em;
+        }
+
+        .card .highlight {
+           color:#3498db;
+           font-weight: bold;
+           font-style: italic;
+        }
+        .card .signature {
+           margin-top: 20px;
+           font-size: 1.6em;
+           font-weight: 700;
+           color: #d0312d;
+           text-align: right;
+           line-height: 1.5;
+        }
+        .card .icon {
+           font-size: 1.8em;
+        }
+          .card .greeting {
+            font-size: 1.6em;
+            color: #3498db;
+            text-align: left;
+             margin-bottom: 10px;
+           }
+
+          .card .ornament {
+             position: absolute;
+             pointer-events: none;
+            }
+
+        .card .ornament-top-left{
+              top: 10px;
+              left: 10px;
+              font-size: 3em;
+             color: #e74c3c;
+              transform: rotate(-20deg);
+             animation: rotateOrnament 5s linear infinite;
+        }
+
+         .card .ornament-bottom-right{
+              bottom: 10px;
+              right: 10px;
+               font-size: 3em;
+              color: #2ecc71;
+              transform: rotate(20deg);
+               animation: rotateOrnament 7s linear infinite;
+         }
+          @keyframes rotateOrnament {
+           0% {transform: rotate(-20deg);}
+            50% {transform: rotate(20deg);}
+             100% {transform: rotate(-20deg);}
+         }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <div id="input-div">
+            <h1 class="main-title">Generate Your Personalized Christmas Card</h1>
+            <label for="nameInput">Enter your child's name:</label>
+            <input type="text" id="nameInput" placeholder="e.g., Coco">
+            <button onclick="generateCard()">Generate Card</button>
+           <p class="instruction">After generating the card, use your browser's print function (usually Ctrl+P or Cmd+P) to print or save it as PDF.</p>
+           <span style="display:none">To regenerate, please refresh this card page</span>
+        </div>
+        <div id="card-container"></div>
+    </div>
+
+    <script>
+        function generateCard() {
+            const name = document.getElementById('nameInput').value;
+            if (!name) {
+                alert("Please enter a name");
+                return;
+            }
+
+            const cardHTML = `
+                <div class="card">
+                <span class="ornament ornament-top-left">🎄</span>
+                <h1>Merry Christmas!</h1>
+                <div class="english-text">
+                    <p class="greeting">🎅 Hi <span class="highlight">${name}</span>,</p>
+                    <p>I hope you are happy! ✨ I am Santa Claus. I see all the good things you did this year. You are amazing! 🌟</p>
+                     <p>At school, you worked hard and were kind to your teachers and friends. 📚👩‍🏫 You are great at learning and helping others. At home, you helped your family a lot. 🏠💖 You are so nice and care about others! 🌈</p>
+                      <p>Keep up the good work, <span class="highlight">${name}</span>! Remember, being kind and working hard always makes the world better. ✨💪 Don't worry, I have some special gifts for you because you are so great! 🎁🎉</p>
+                    <p >Be happy, be curious, and keep shining, ${name}! 🌟🎄</p>
+                    </div>
+
+                <p class="signature">Warm wishes and big hugs, <span class="icon">🎅</span><br>Santa Claus</p>
+                <span class="ornament ornament-bottom-right">🎁</span>
+            </div>
+            `;
+
+            document.getElementById('card-container').innerHTML = cardHTML;
+            document.getElementById('input-div').style.display = 'none';
+        }
+    </script>
+    <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','G-P7HH84C7HJ');</script>
+        <!-- End Google Tag Manager -->
+</body>
+</html>
